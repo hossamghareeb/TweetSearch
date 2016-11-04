@@ -1,26 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jMH-Pi-fCQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search Tweets-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="TweetSearchViewController" customModule="TweetsSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search tweets" translatesAutoresizingMaskIntoConstraints="NO" id="frw-Xo-bDh">
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hi7-G8-8g3">
+                                <rect key="frame" x="339" y="12" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vc6-tM-Hcb">
+                                <rect key="frame" x="0.0" y="44" width="375" height="559"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="frw-Xo-bDh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4fh-Nm-rpa"/>
+                            <constraint firstAttribute="trailing" secondItem="vc6-tM-Hcb" secondAttribute="trailing" id="5zQ-Bo-O53"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vc6-tM-Hcb" secondAttribute="bottom" id="HEy-x8-HvW"/>
+                            <constraint firstItem="hi7-G8-8g3" firstAttribute="centerY" secondItem="frw-Xo-bDh" secondAttribute="centerY" id="JEA-pH-LrC"/>
+                            <constraint firstItem="hi7-G8-8g3" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Y8Y-w4-HSF"/>
+                            <constraint firstItem="vc6-tM-Hcb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="a3z-aD-m2L"/>
+                            <constraint firstItem="frw-Xo-bDh" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-50" id="eLd-gL-Zj5"/>
+                            <constraint firstItem="vc6-tM-Hcb" firstAttribute="top" secondItem="frw-Xo-bDh" secondAttribute="bottom" id="hfn-So-IJV"/>
+                            <constraint firstItem="frw-Xo-bDh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="pQJ-tZ-CzS"/>
+                        </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Search Tweets" id="plX-x8-99Z">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="1Va-ji-x2e"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="hi7-G8-8g3" id="VxD-Uy-eV7"/>
+                        <outlet property="tweetSearchBar" destination="frw-Xo-bDh" id="8hO-h9-L1D"/>
+                        <outlet property="tweetsTableView" destination="vc6-tM-Hcb" id="CDJ-xa-WPs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1080.8" y="98.50074962518741"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vqq-wP-Uan">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jMH-Pi-fCQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KO8-QJ-3QB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="pQG-Z0-HG2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iPY-Jq-Lo0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="-545.57721139430294"/>
         </scene>
     </scenes>
 </document>
