@@ -8,6 +8,22 @@
 
 import UIKit
 
-class TweetsResponse: NSObject {
+struct TweetsResponse {
+    let count: Int
+    let query: String
+    let nextResultsParamsString: String
+    let tweets: [Tweet]
+}
 
+
+struct Tweet{
+    let text: String
+    let retweetCount: Int
+    let id: String
+}
+
+struct User{
+    let name: String
+    let screenName: String
+    let profileImageURLString: String
 }

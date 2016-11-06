@@ -55,6 +55,12 @@ class TwitterService: NSObject {
                 }
                 else{
                     // We have good response now, let's try to parse it.
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []){
+                        
+                    }
+                    else{
+                        handler(.ConnectionError, nil)
+                    }
                 }
             })
         }
