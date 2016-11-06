@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jMH-Pi-fCQ">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jMH-Pi-fCQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,29 +22,34 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search tweets" translatesAutoresizingMaskIntoConstraints="NO" id="frw-Xo-bDh">
-                                <rect key="frame" x="0.0" y="0.0" width="325" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hi7-G8-8g3">
-                                <rect key="frame" x="339" y="12" width="20" height="20"/>
-                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vc6-tM-Hcb">
                                 <rect key="frame" x="0.0" y="44" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NaG-dK-bED">
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Jda-vs-ACk"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hi7-G8-8g3">
+                                <rect key="frame" x="339" y="12" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="frw-Xo-bDh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4fh-Nm-rpa"/>
                             <constraint firstAttribute="trailing" secondItem="vc6-tM-Hcb" secondAttribute="trailing" id="5zQ-Bo-O53"/>
+                            <constraint firstItem="NaG-dK-bED" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="9aw-gJ-VYr"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vc6-tM-Hcb" secondAttribute="bottom" id="HEy-x8-HvW"/>
-                            <constraint firstItem="hi7-G8-8g3" firstAttribute="centerY" secondItem="frw-Xo-bDh" secondAttribute="centerY" id="JEA-pH-LrC"/>
+                            <constraint firstItem="hi7-G8-8g3" firstAttribute="centerY" secondItem="NaG-dK-bED" secondAttribute="centerY" id="OFb-Tn-TRW"/>
+                            <constraint firstItem="vc6-tM-Hcb" firstAttribute="top" secondItem="NaG-dK-bED" secondAttribute="bottom" id="Sd0-vQ-qhO"/>
                             <constraint firstItem="hi7-G8-8g3" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Y8Y-w4-HSF"/>
                             <constraint firstItem="vc6-tM-Hcb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="a3z-aD-m2L"/>
-                            <constraint firstItem="frw-Xo-bDh" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-50" id="eLd-gL-Zj5"/>
-                            <constraint firstItem="vc6-tM-Hcb" firstAttribute="top" secondItem="frw-Xo-bDh" secondAttribute="bottom" id="hfn-So-IJV"/>
-                            <constraint firstItem="frw-Xo-bDh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="pQJ-tZ-CzS"/>
+                            <constraint firstItem="NaG-dK-bED" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-50" id="ahu-gE-pyi"/>
+                            <constraint firstItem="NaG-dK-bED" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gI0-y5-5cr"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -53,7 +58,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="hi7-G8-8g3" id="VxD-Uy-eV7"/>
-                        <outlet property="tweetSearchBar" destination="frw-Xo-bDh" id="8hO-h9-L1D"/>
+                        <outlet property="searchTextField" destination="NaG-dK-bED" id="jVa-MO-oVn"/>
                         <outlet property="tweetsTableView" destination="vc6-tM-Hcb" id="CDJ-xa-WPs"/>
                     </connections>
                 </viewController>

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0643EEFA1DCF0249008997D0 /* Bond.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0643EEF81DCF0249008997D0 /* Bond.framework */; };
+		0643EEFB1DCF0249008997D0 /* ReactiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0643EEF91DCF0249008997D0 /* ReactiveKit.framework */; };
 		06BAFC971DCC6711005B291E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAFC961DCC6711005B291E /* AppDelegate.swift */; };
 		06BAFC9C1DCC6711005B291E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06BAFC9A1DCC6711005B291E /* Main.storyboard */; };
 		06BAFC9E1DCC6711005B291E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06BAFC9D1DCC6711005B291E /* Assets.xcassets */; };
@@ -27,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0643EEF81DCF0249008997D0 /* Bond.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bond.framework; path = Carthage/Build/iOS/Bond.framework; sourceTree = "<group>"; };
+		0643EEF91DCF0249008997D0 /* ReactiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveKit.framework; path = Carthage/Build/iOS/ReactiveKit.framework; sourceTree = "<group>"; };
 		06BAFC931DCC6711005B291E /* TweetsSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweetsSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06BAFC961DCC6711005B291E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06BAFC9B1DCC6711005B291E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -45,6 +49,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0643EEFA1DCF0249008997D0 /* Bond.framework in Frameworks */,
+				0643EEFB1DCF0249008997D0 /* ReactiveKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,12 +64,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0643EEF21DCF005F008997D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0643EEF81DCF0249008997D0 /* Bond.framework */,
+				0643EEF91DCF0249008997D0 /* ReactiveKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		06BAFC8A1DCC6711005B291E = {
 			isa = PBXGroup;
 			children = (
 				06BAFC951DCC6711005B291E /* TweetsSearch */,
 				06BAFCAA1DCC6711005B291E /* TweetsSearchTests */,
 				06BAFC941DCC6711005B291E /* Products */,
+				0643EEF21DCF005F008997D0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,6 +149,7 @@
 				06BAFC8F1DCC6711005B291E /* Sources */,
 				06BAFC901DCC6711005B291E /* Frameworks */,
 				06BAFC911DCC6711005B291E /* Resources */,
+				0643EEFC1DCF0251008997D0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -222,6 +239,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0643EEFC1DCF0251008997D0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Bond.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveKit.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		06BAFC8F1DCC6711005B291E /* Sources */ = {
@@ -370,6 +405,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3Q27BC9WV8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = TweetsSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hossamghareeb.TweetsSearch;
@@ -383,6 +422,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3Q27BC9WV8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = TweetsSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hossamghareeb.TweetsSearch;
@@ -440,6 +483,7 @@
 				06BAFCB21DCC6711005B291E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		06BAFCB31DCC6711005B291E /* Build configuration list for PBXNativeTarget "TweetsSearchTests" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +492,7 @@
 				06BAFCB51DCC6711005B291E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
