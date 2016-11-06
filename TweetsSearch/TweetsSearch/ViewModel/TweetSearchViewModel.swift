@@ -23,6 +23,8 @@ class TweetSearchViewModel {
     let twitterService: TwitterService = TwitterService()
     let twitterServiceError = Observable(TwitterServiceError.NoError)
     
+    let items = MutableObservableArray<Tweet>([])
+    
     init() {
         searchString.value = "" // default value in text field of search
 
@@ -46,7 +48,11 @@ class TweetSearchViewModel {
     func startTweetSearching(searchText text: String){
         print(text)
         self.twitterService.searchTweets(searchText: text, handler: { (error, tweets) in
-            
+            self.twitterServiceError.value = .NoError
+            self.items.removeAll()
+            if let tweets = tweets as? [Tweet]{
+                self.items.insert(contentsOf: tweets, at: 0)
+            }
         })
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import Accounts
 import Social
+import Argo
 
 typealias AccessSocialAccountHandler = (_ granted: Bool, _ error: TwitterServiceError) -> ()
 typealias RequestTweetsHandler = (_ error: TwitterServiceError, _ tweets:AnyObject?) -> ()
@@ -51,12 +52,16 @@ class TwitterService: NSObject {
             request.account = account
             request.perform(handler: { (data, response, error) in
                 if error != nil || response?.statusCode != 200{
+                    print(error as Any)
                     handler(.ConnectionError, nil)
                 }
                 else{
                     // We have good response now, let's try to parse it.
-                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []){
-                        
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments){
+                        let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                        print(str as Any)
+                        let tweetResponse: TweetsResponse? = decode(json)
+                        handler(.NoError, tweetResponse as AnyObject?)
                     }
                     else{
                         handler(.ConnectionError, nil)

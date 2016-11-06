@@ -39,7 +39,10 @@ class TweetSearchViewController: UIViewController {
             .bind(to: self.searchTextField.bnd_textColor)
         self.viewModel.isSearching.bind(to: self.activityIndicator.bnd_animating)
         _ = self.viewModel.twitterServiceError.observeNext { (error) in
-            
+            self.tweetsTableView.reloadData()
         }
+        _ = self.viewModel.items.observeNext(with: { (e) in
+            self.tweetsTableView.reloadData()
+        })
     }
 }

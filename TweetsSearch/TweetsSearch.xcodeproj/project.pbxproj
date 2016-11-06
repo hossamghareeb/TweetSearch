@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		062FEBD61DCF6AC500C2B15D /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062FEBD31DCF6AC500C2B15D /* Argo.framework */; };
+		062FEBD71DCF6AC500C2B15D /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062FEBD41DCF6AC500C2B15D /* Curry.framework */; };
+		062FEBD81DCF6AC500C2B15D /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062FEBD51DCF6AC500C2B15D /* Runes.framework */; };
 		0643EEFA1DCF0249008997D0 /* Bond.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0643EEF81DCF0249008997D0 /* Bond.framework */; };
 		0643EEFB1DCF0249008997D0 /* ReactiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0643EEF91DCF0249008997D0 /* ReactiveKit.framework */; };
 		06655FAB1DCF1C470023A5C6 /* TwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06655FAA1DCF1C470023A5C6 /* TwitterService.swift */; };
@@ -31,6 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		062FEBD31DCF6AC500C2B15D /* Argo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Argo.framework; path = Carthage/Build/iOS/Argo.framework; sourceTree = "<group>"; };
+		062FEBD41DCF6AC500C2B15D /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Curry.framework; path = Carthage/Build/iOS/Curry.framework; sourceTree = "<group>"; };
+		062FEBD51DCF6AC500C2B15D /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Runes.framework; path = Carthage/Build/iOS/Runes.framework; sourceTree = "<group>"; };
 		0643EEF81DCF0249008997D0 /* Bond.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bond.framework; path = Carthage/Build/iOS/Bond.framework; sourceTree = "<group>"; };
 		0643EEF91DCF0249008997D0 /* ReactiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveKit.framework; path = Carthage/Build/iOS/ReactiveKit.framework; sourceTree = "<group>"; };
 		06655FAA1DCF1C470023A5C6 /* TwitterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterService.swift; sourceTree = "<group>"; };
@@ -53,6 +59,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				062FEBD61DCF6AC500C2B15D /* Argo.framework in Frameworks */,
+				062FEBD71DCF6AC500C2B15D /* Curry.framework in Frameworks */,
+				062FEBD81DCF6AC500C2B15D /* Runes.framework in Frameworks */,
 				0643EEFA1DCF0249008997D0 /* Bond.framework in Frameworks */,
 				0643EEFB1DCF0249008997D0 /* ReactiveKit.framework in Frameworks */,
 			);
@@ -71,6 +80,9 @@
 		0643EEF21DCF005F008997D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				062FEBD31DCF6AC500C2B15D /* Argo.framework */,
+				062FEBD41DCF6AC500C2B15D /* Curry.framework */,
+				062FEBD51DCF6AC500C2B15D /* Runes.framework */,
 				0643EEF81DCF0249008997D0 /* Bond.framework */,
 				0643EEF91DCF0249008997D0 /* ReactiveKit.framework */,
 			);
@@ -271,6 +283,9 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Bond.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Runes.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Curry.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Argo.framework",
 			);
 			outputPaths = (
 			);
