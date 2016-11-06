@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0643EEFA1DCF0249008997D0 /* Bond.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0643EEF81DCF0249008997D0 /* Bond.framework */; };
 		0643EEFB1DCF0249008997D0 /* ReactiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0643EEF91DCF0249008997D0 /* ReactiveKit.framework */; };
+		06655FAB1DCF1C470023A5C6 /* TwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06655FAA1DCF1C470023A5C6 /* TwitterService.swift */; };
+		06655FAD1DCF55D40023A5C6 /* TweetsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06655FAC1DCF55D40023A5C6 /* TweetsResponse.swift */; };
 		06BAFC971DCC6711005B291E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAFC961DCC6711005B291E /* AppDelegate.swift */; };
 		06BAFC9C1DCC6711005B291E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06BAFC9A1DCC6711005B291E /* Main.storyboard */; };
 		06BAFC9E1DCC6711005B291E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06BAFC9D1DCC6711005B291E /* Assets.xcassets */; };
@@ -31,6 +33,8 @@
 /* Begin PBXFileReference section */
 		0643EEF81DCF0249008997D0 /* Bond.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bond.framework; path = Carthage/Build/iOS/Bond.framework; sourceTree = "<group>"; };
 		0643EEF91DCF0249008997D0 /* ReactiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveKit.framework; path = Carthage/Build/iOS/ReactiveKit.framework; sourceTree = "<group>"; };
+		06655FAA1DCF1C470023A5C6 /* TwitterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterService.swift; sourceTree = "<group>"; };
+		06655FAC1DCF55D40023A5C6 /* TweetsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsResponse.swift; sourceTree = "<group>"; };
 		06BAFC931DCC6711005B291E /* TweetsSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweetsSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06BAFC961DCC6711005B291E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06BAFC9B1DCC6711005B291E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,6 +75,22 @@
 				0643EEF91DCF0249008997D0 /* ReactiveKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		06655FA81DCF1A5B0023A5C6 /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				06655FAC1DCF55D40023A5C6 /* TweetsResponse.swift */,
+			);
+			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		06655FA91DCF1A5B0023A5C6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				06655FAA1DCF1C470023A5C6 /* TwitterService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		06BAFC8A1DCC6711005B291E = {
@@ -119,6 +139,8 @@
 		06BAFCB61DCC68A1005B291E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				06655FA81DCF1A5B0023A5C6 /* DataStructures */,
+				06655FA91DCF1A5B0023A5C6 /* Services */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -265,7 +287,9 @@
 			files = (
 				06BAFCBC1DCC6929005B291E /* TweetSearchViewModel.swift in Sources */,
 				06BAFCBA1DCC68BF005B291E /* TweetSearchViewController.swift in Sources */,
+				06655FAD1DCF55D40023A5C6 /* TweetsResponse.swift in Sources */,
 				06BAFC971DCC6711005B291E /* AppDelegate.swift in Sources */,
+				06655FAB1DCF1C470023A5C6 /* TwitterService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

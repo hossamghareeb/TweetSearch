@@ -27,11 +27,19 @@ class TweetSearchViewController: UIViewController {
         bindViewModel()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.viewModel.requestAccessToTwitterAccount()
+    }
+    
     func bindViewModel(){
         self.viewModel.searchString.bidirectionalBind(to: self.searchTextField.bnd_text)
         self.viewModel.validSearchString
             .map{$0 ? UIColor.black : UIColor.red}
             .bind(to: self.searchTextField.bnd_textColor)
         self.viewModel.isSearching.bind(to: self.activityIndicator.bnd_animating)
+        _ = self.viewModel.twitterServiceError.observeNext { (error) in
+            
+        }
     }
 }

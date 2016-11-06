@@ -20,6 +20,8 @@ class TweetSearchViewModel {
     let searchString = Observable<String?>("")
     let validSearchString = Observable<Bool>(false)
     let isSearching = Observable<Bool>(false)
+    let twitterService: TwitterService = TwitterService()
+    let twitterServiceError = Observable(TwitterServiceError.NoError)
     
     init() {
         searchString.value = "" // default value in text field of search
@@ -35,7 +37,16 @@ class TweetSearchViewModel {
         }
     }
     
+    func requestAccessToTwitterAccount(){
+        self.twitterService.requestAccessToTwitterAccount { (granted, error) in
+            self.twitterServiceError.value = error
+        }
+    }
+    
     func startTweetSearching(searchText text: String){
         print(text)
+        self.twitterService.searchTweets(searchText: text, handler: { (error, tweets) in
+            
+        })
     }
 }
