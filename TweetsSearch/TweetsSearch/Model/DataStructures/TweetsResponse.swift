@@ -26,7 +26,7 @@ struct TweetsResponse {
 extension TweetsResponse: Decodable {
     static func decode(_ j: JSON) -> Decoded<TweetsResponse> {
         return curry(TweetsResponse.init)
-            <^> j <| ["count"]
+            <^> j <| ["search_metadata", "count"]
             <*> j <| ["search_metadata", "query"]
             <*> j <| ["search_metadata", "next_results"]
             <*> j <|| "statuses" // parse arrays of objects

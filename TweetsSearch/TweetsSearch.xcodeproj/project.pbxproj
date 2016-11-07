@@ -21,6 +21,9 @@
 		06BAFCAC1DCC6711005B291E /* TweetsSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAFCAB1DCC6711005B291E /* TweetsSearchTests.swift */; };
 		06BAFCBA1DCC68BF005B291E /* TweetSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAFCB91DCC68BF005B291E /* TweetSearchViewController.swift */; };
 		06BAFCBC1DCC6929005B291E /* TweetSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BAFCBB1DCC6929005B291E /* TweetSearchViewModel.swift */; };
+		06F1D9281DD04A5D000B8FCF /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F1D9271DD04A5D000B8FCF /* DZNEmptyDataSet.framework */; };
+		06F1D92A1DD061C8000B8FCF /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F1D9291DD061C8000B8FCF /* TweetTableViewCell.swift */; };
+		06F1D92C1DD061F5000B8FCF /* TweetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F1D92B1DD061F5000B8FCF /* TweetCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,9 @@
 		06BAFCAD1DCC6711005B291E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06BAFCB91DCC68BF005B291E /* TweetSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetSearchViewController.swift; sourceTree = "<group>"; };
 		06BAFCBB1DCC6929005B291E /* TweetSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetSearchViewModel.swift; sourceTree = "<group>"; };
+		06F1D9271DD04A5D000B8FCF /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
+		06F1D9291DD061C8000B8FCF /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		06F1D92B1DD061F5000B8FCF /* TweetCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06F1D9281DD04A5D000B8FCF /* DZNEmptyDataSet.framework in Frameworks */,
 				062FEBD61DCF6AC500C2B15D /* Argo.framework in Frameworks */,
 				062FEBD71DCF6AC500C2B15D /* Curry.framework in Frameworks */,
 				062FEBD81DCF6AC500C2B15D /* Runes.framework in Frameworks */,
@@ -80,6 +87,7 @@
 		0643EEF21DCF005F008997D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06F1D9271DD04A5D000B8FCF /* DZNEmptyDataSet.framework */,
 				062FEBD31DCF6AC500C2B15D /* Argo.framework */,
 				062FEBD41DCF6AC500C2B15D /* Curry.framework */,
 				062FEBD51DCF6AC500C2B15D /* Runes.framework */,
@@ -161,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				06BAFCB91DCC68BF005B291E /* TweetSearchViewController.swift */,
+				06F1D9291DD061C8000B8FCF /* TweetTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -169,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				06BAFCBB1DCC6929005B291E /* TweetSearchViewModel.swift */,
+				06F1D92B1DD061F5000B8FCF /* TweetCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -286,6 +296,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Runes.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Curry.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Argo.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/DZNEmptyDataSet.framework",
 			);
 			outputPaths = (
 			);
@@ -300,11 +311,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06F1D92C1DD061F5000B8FCF /* TweetCellViewModel.swift in Sources */,
 				06BAFCBC1DCC6929005B291E /* TweetSearchViewModel.swift in Sources */,
 				06BAFCBA1DCC68BF005B291E /* TweetSearchViewController.swift in Sources */,
 				06655FAD1DCF55D40023A5C6 /* TweetsResponse.swift in Sources */,
 				06BAFC971DCC6711005B291E /* AppDelegate.swift in Sources */,
 				06655FAB1DCF1C470023A5C6 /* TwitterService.swift in Sources */,
+				06F1D92A1DD061C8000B8FCF /* TweetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

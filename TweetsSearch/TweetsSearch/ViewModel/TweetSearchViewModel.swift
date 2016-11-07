@@ -41,18 +41,41 @@ class TweetSearchViewModel {
     
     func requestAccessToTwitterAccount(){
         self.twitterService.requestAccessToTwitterAccount { (granted, error) in
-            self.twitterServiceError.value = error
+            DispatchQueue.main.async {
+                self.twitterServiceError.value = error
+            }
         }
+    }
+    
+    func viewModelForTweetAtIndex(index: Int) -> TweetCellViewModel?{
+        if index >= 0 && index < self.items.count {
+            let tweet = self.items[index]
+            let viewModel = TweetCellViewModel(tweet: tweet)
+            return viewModel
+        }
+        return nil
     }
     
     func startTweetSearching(searchText text: String){
         print(text)
-        self.twitterService.searchTweets(searchText: text, handler: { (error, tweets) in
-            self.twitterServiceError.value = .NoError
-            self.items.removeAll()
-            if let tweets = tweets as? [Tweet]{
-                self.items.insert(contentsOf: tweets, at: 0)
+        if self.twitterServiceError.value == .AccessDenied {
+            return
+        }
+        self.isSearching.value = true
+        self.twitterService.searchTweets(searchText: text, handler: { (error, tweetResponse) in
+            DispatchQueue.main.async {
+                self.twitterServiceError.value = error
+                self.isSearching.value = false
+                
+                if error == .NoError{
+                    self.items.removeAll()
+                    if let response = tweetResponse{
+                        self.items.insert(contentsOf: response.tweets, at: 0)
+                    }
+                }
+                
             }
+            
         })
     }
 }

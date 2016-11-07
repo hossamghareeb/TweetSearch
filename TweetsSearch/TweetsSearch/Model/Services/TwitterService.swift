@@ -12,7 +12,7 @@ import Social
 import Argo
 
 typealias AccessSocialAccountHandler = (_ granted: Bool, _ error: TwitterServiceError) -> ()
-typealias RequestTweetsHandler = (_ error: TwitterServiceError, _ tweets:AnyObject?) -> ()
+typealias RequestTweetsHandler = (_ error: TwitterServiceError, _ tweets:TweetsResponse?) -> ()
 
 enum TwitterServiceError{
     case NoError
@@ -61,7 +61,7 @@ class TwitterService: NSObject {
                         let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                         print(str as Any)
                         let tweetResponse: TweetsResponse? = decode(json)
-                        handler(.NoError, tweetResponse as AnyObject?)
+                        handler(.NoError, tweetResponse)
                     }
                     else{
                         handler(.ConnectionError, nil)
