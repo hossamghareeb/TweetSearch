@@ -78,7 +78,8 @@ class TwitterService: NSObject {
         let url = URL(string: Constants.TwitterRESTURLString)
         let params = [
             "q" : text,
-            "count": "\(Constants.TweetsPageSize)"
+            "count": "\(Constants.TweetsPageSize)",
+            "lang": "en"
         ]
         return SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, url: url, parameters: params)
     }

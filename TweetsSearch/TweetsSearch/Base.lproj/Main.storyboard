@@ -22,38 +22,53 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vc6-tM-Hcb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vc6-tM-Hcb">
                                 <rect key="frame" x="0.0" y="44" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Yqo-fL-O1d">
-                                    <rect key="frame" x="0.0" y="72" width="375" height="1"/>
+                                    <rect key="frame" x="0.0" y="89" width="375" height="1"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="zA6-YR-gvO" detailTextLabel="gSX-IF-yKX" style="IBUITableViewCellStyleSubtitle" id="4Jb-pK-2Uv" customClass="TweetTableViewCell" customModule="TweetsSearch" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="61" id="4Jb-pK-2Uv" customClass="TweetTableViewCell" customModule="TweetsSearch" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Jb-pK-2Uv" id="Zba-Ps-0Ju">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zA6-YR-gvO">
-                                                    <rect key="frame" x="15" y="4" width="34" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3NN-Hg-CWc">
+                                                    <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="83X-jJ-3eM"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gSX-IF-yKX">
-                                                    <rect key="frame" x="15" y="25" width="44" height="15"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="W85-bX-Sq3">
+                                                    <rect key="frame" x="8" y="35" width="359" height="17"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                </textView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="W85-bX-Sq3" firstAttribute="bottom" secondItem="Zba-Ps-0Ju" secondAttribute="bottomMargin" id="6Qq-Ys-hVT"/>
+                                                <constraint firstItem="3NN-Hg-CWc" firstAttribute="top" secondItem="Zba-Ps-0Ju" secondAttribute="topMargin" id="Qnz-8Z-NvO"/>
+                                                <constraint firstItem="W85-bX-Sq3" firstAttribute="leading" secondItem="Zba-Ps-0Ju" secondAttribute="leadingMargin" id="Qzc-Th-Xvv"/>
+                                                <constraint firstItem="3NN-Hg-CWc" firstAttribute="leading" secondItem="Zba-Ps-0Ju" secondAttribute="leadingMargin" id="Ujl-2K-hfv"/>
+                                                <constraint firstItem="3NN-Hg-CWc" firstAttribute="trailing" secondItem="Zba-Ps-0Ju" secondAttribute="trailingMargin" id="hbe-5o-3c5"/>
+                                                <constraint firstItem="W85-bX-Sq3" firstAttribute="top" secondItem="3NN-Hg-CWc" secondAttribute="bottom" constant="6" id="ihG-bu-pJZ"/>
+                                                <constraint firstItem="W85-bX-Sq3" firstAttribute="trailing" secondItem="Zba-Ps-0Ju" secondAttribute="trailingMargin" id="q3f-dz-8iD"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="3NN-Hg-CWc" id="AwP-91-gzz"/>
+                                            <outlet property="tweetTextView" destination="W85-bX-Sq3" id="M4R-UC-8qP"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

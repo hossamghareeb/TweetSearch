@@ -10,39 +10,80 @@ import UIKit
 
 class TweetTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var tweetTextView: UITextView!
+    @IBOutlet weak var titleLabel: UILabel!
     private var viewModel: TweetCellViewModel? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.tweetTextView.delegate = self
     }
     
     func bindViewModel(viewModel: TweetCellViewModel){
         
         // Binding goes here...
-       
         _ = viewModel.username.observeNext(with: { (realName, screenName) in
             
             let name = NSMutableAttributedString(string: "\(realName) @\(screenName)")
             let range1 = NSMakeRange(0, realName.characters.count)
             name.addAttributes([
-                NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)], range: range1)
+                NSFontAttributeName: UIFont.boldSystemFont(ofSize: 17)], range: range1)
             let range2 = NSMakeRange(range1.location + range1.length + 1, screenName.characters.count + 1)
-            name.addAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 10)], range: range2)
-            self.textLabel?.attributedText = name
+            name.addAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 13)], range: range2)
+            self.titleLabel.attributedText = name
         })
-        if let detailsLabel = self.detailTextLabel{
-            viewModel.tweetText.bind(to: detailsLabel)
+        _ = viewModel.tweetText.observeNext { (text) in
+            self.tweetTextView.sizeToFit()
+            self.styleMentionsAndHashTags()
         }
         
         
         self.viewModel = viewModel
     }
 
+    func styleMentionsAndHashTags(){
+        if let viewModel = self.viewModel{
+            let attributedText = NSMutableAttributedString(string: viewModel.tweetText.value)
+            print("================")
+            for (range, mention) in viewModel.metnionsInTweetText(){
+                attributedText.addAttributes([NSForegroundColorAttributeName: UIColor.blue], range: range)
+                attributedText.addAttributes([NSLinkAttributeName: "mention://\(mention)"], range: range)
+                print(mention)
+            }
+            
+            for (range, hashtag) in viewModel.hashtagsInTweetText(){
+                attributedText.addAttributes([NSForegroundColorAttributeName: UIColor.blue], range: range)
+                attributedText.addAttributes([NSLinkAttributeName: "hashtag://\(hashtag)"], range: range)
+                print(hashtag)
+            }
+            
+            print("================")
+            self.tweetTextView.attributedText = attributedText
+            
+        }
+        
+        
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
+}
+
+extension TweetTableViewCell: UITextViewDelegate{
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        
+        if URL.scheme == "mention" || URL.scheme == "hashtag" {
+            
+            /// There urls are ours, we gonna handle them ourselves :)
+            print(URL.host)
+            return false
+        }
+        return true // Let the system handles these kinds of urls :)
+    }
 }

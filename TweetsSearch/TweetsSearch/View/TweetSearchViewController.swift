@@ -30,6 +30,8 @@ class TweetSearchViewController: UIViewController {
         self.tweetsTableView.dataSource = self
         self.tweetsTableView.emptyDataSetSource = self
         self.tweetsTableView.emptyDataSetDelegate = self
+        self.tweetsTableView.rowHeight = UITableViewAutomaticDimension
+        self.tweetsTableView.estimatedRowHeight = 50
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,7 +58,11 @@ class TweetSearchViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource -
-
+extension TweetSearchViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+}
 
 extension TweetSearchViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

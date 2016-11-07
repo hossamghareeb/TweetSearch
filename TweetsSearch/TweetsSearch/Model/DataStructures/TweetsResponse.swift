@@ -13,14 +13,9 @@ import Runes
 struct TweetsResponse {
     let count: Int
     let query: String
-    let nextResultsParamsString: String
+    let nextResultsParamsString: String?
+    let refreshResultsParamsString: String?
     let tweets: [Tweet]
-    init(count: Int, query: String, nextResultsParamsString: String, tweets: [Tweet]) {
-        self.count = count;
-        self.query = query;
-        self.nextResultsParamsString = nextResultsParamsString;
-        self.tweets = tweets
-    }
 }
 
 extension TweetsResponse: Decodable {
@@ -28,7 +23,8 @@ extension TweetsResponse: Decodable {
         return curry(TweetsResponse.init)
             <^> j <| ["search_metadata", "count"]
             <*> j <| ["search_metadata", "query"]
-            <*> j <| ["search_metadata", "next_results"]
+            <*> j <|? ["search_metadata", "next_results"]
+            <*> j <|? ["search_metadata", "refresh_url"]
             <*> j <|| "statuses" // parse arrays of objects
     }
 }
