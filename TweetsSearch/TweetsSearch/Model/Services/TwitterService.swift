@@ -75,9 +75,10 @@ class TwitterService: NSObject {
     }
     
     private func requestforSearchText(text: String, paramsString: String = "") -> SLRequest {
-        let url = URL(string: Constants.TwitterRESTURLString + paramsString)
+        let url = URL(string: Constants.TwitterRESTURLString)
         var params = [AnyHashable: Any]()
         if paramsString != "" {
+            let paramsString = paramsString.replacingOccurrences(of: "?", with: "")
             let parts = paramsString.components(separatedBy: "&")
             for p in parts{
                 let keyValue = p.components(separatedBy: "=")

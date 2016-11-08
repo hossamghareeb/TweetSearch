@@ -22,12 +22,15 @@ class TweetSearchViewController: UIViewController {
     
     var text: String = ""
     
+    let refreshingCellIdentifier = "RefreshCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         bindViewModel()
         
+        self.tweetsTableView.delegate = self
         self.tweetsTableView.dataSource = self
         self.tweetsTableView.emptyDataSetSource = self
         self.tweetsTableView.emptyDataSetDelegate = self
@@ -49,6 +52,13 @@ class TweetSearchViewController: UIViewController {
     
     // MARK: - View Model Binding -
 
+    private func indexesPathsFromIntArray(arr: [Int], section: Int = 0) -> [IndexPath]{
+        var indexPaths = [IndexPath]()
+        for i in arr{
+            indexPaths.append(IndexPath(row: i, section: section))
+        }
+        return indexPaths
+    }
     
     func bindViewModel(){
         self.viewModel.searchString.bidirectionalBind(to: self.searchTextField.bnd_text)
@@ -60,21 +70,35 @@ class TweetSearchViewController: UIViewController {
         _ = self.viewModel.twitterServiceError.observeNext { (error) in
             self.tweetsTableView.reloadData()
         }
-        _ = self.viewModel.items.observeNext(with: { (e) in
+        _ = self.viewModel.items.observeNext { (e) in
+            self.tweetsTableView.setContentOffset(CGPoint.zero, animated: false)
             self.tweetsTableView.reloadData()
-        })
+        }
     }
 }
 
 // MARK: - UITableViewDataSource -
 extension TweetSearchViewController: UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell.reuseIdentifier == refreshingCellIdentifier{
+            print(indexPath.row)
+            self.viewModel.requestNextPageOfTweets()
+        }
+    }
 }
 
 extension TweetSearchViewController: UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.items.count
+        return self.viewModel.items.count + (self.viewModel.items.count > 0 && self.viewModel.hasMorePages ? 1 : 0) // For the refreshing cell
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if self.viewModel.hasMorePages && indexPath.row == self.viewModel.items.count {
+            return tableView.dequeueReusableCell(withIdentifier: refreshingCellIdentifier)!
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TweetTableViewCell
         if let vm = self.viewModel.viewModelForTweetAtIndex(index: indexPath.row) {
             cell.bindViewModel(viewModel: vm)

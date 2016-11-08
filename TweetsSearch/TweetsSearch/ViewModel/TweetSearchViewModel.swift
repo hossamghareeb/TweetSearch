@@ -25,6 +25,10 @@ class TweetSearchViewModel {
     
     let items = MutableObservableArray<Tweet>([])
     
+    var hasMorePages = false
+    
+    private var isRequestingNextPage = false
+    
     private var currentTweetResponse: TweetsResponse?
     
     init() {
@@ -37,6 +41,11 @@ class TweetSearchViewModel {
             .filter{$0!.characters.count > Constants.MinimumSearchLength }
             .throttle(seconds: Constants.SearchThrottleTimeInSeconds)
             .observeNext{ [unowned self] text in
+                if let response = self.currentTweetResponse{
+                    if response.query == text{
+                        return
+                    }
+                }
                 self.startTweetSearching(searchText: text!)
         }
     }
@@ -58,37 +67,47 @@ class TweetSearchViewModel {
         return nil
     }
     
-    func refreshCurrentTweet(){
+    func requestNextPageOfTweets(){
         if let response = currentTweetResponse{
-            startTweetSearching(searchText: response.query, isRefreshing: true)
+            if isRequestingNextPage {
+                return
+            }
+            self.isRequestingNextPage = true
+            startTweetSearching(searchText: response.query, preReadyParams: response.nextResultsParamsString ?? "")
         }
     }
     
-    func startTweetSearching(searchText text: String, isRefreshing: Bool = false){
+    func refreshCurrentTweet(){
+        if let response = currentTweetResponse{
+            startTweetSearching(searchText: response.query, preReadyParams: response.refreshResultsParamsString ?? "")
+        }
+    }
+    
+    func startTweetSearching(searchText text: String, preReadyParams: String = ""){
         print(text)
         if self.twitterServiceError.value == .AccessDenied {
             return
         }
         self.isSearching.value = true
-        var params = ""
-        if let response = currentTweetResponse {
-            if isRefreshing {
-                params = response.refreshResultsParamsString!
-            }
-        }
-        self.twitterService.searchTweets(searchText: text, readyQueryParamsString: params, handler: {(error, tweetResponse) in
+        
+        self.twitterService.searchTweets(searchText: text, readyQueryParamsString: preReadyParams, handler: {(error, tweetResponse) in
         
             DispatchQueue.main.async {
                 self.twitterServiceError.value = error
                 self.isSearching.value = false
-                
                 if error == .NoError{
-                    self.items.removeAll()
+                    if(!self.isRequestingNextPage){
+                        self.items.removeAll()
+                    }
                     if let response = tweetResponse{
                         self.currentTweetResponse = response
-                        self.items.insert(contentsOf: response.tweets, at: 0)
+                        self.hasMorePages = response.nextResultsParamsString != nil
+                        self.items.insert(contentsOf: response.tweets, at: self.items.count)
+                        
                     }
                 }
+                
+                self.isRequestingNextPage = false
                 
             }
         })
