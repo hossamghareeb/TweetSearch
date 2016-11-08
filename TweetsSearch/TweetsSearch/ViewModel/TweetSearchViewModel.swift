@@ -25,6 +25,8 @@ class TweetSearchViewModel {
     
     let items = MutableObservableArray<Tweet>([])
     
+    private var currentTweetResponse: TweetsResponse?
+    
     init() {
         searchString.value = "" // default value in text field of search
 
@@ -56,13 +58,26 @@ class TweetSearchViewModel {
         return nil
     }
     
-    func startTweetSearching(searchText text: String){
+    func refreshCurrentTweet(){
+        if let response = currentTweetResponse{
+            startTweetSearching(searchText: response.query, isRefreshing: true)
+        }
+    }
+    
+    func startTweetSearching(searchText text: String, isRefreshing: Bool = false){
         print(text)
         if self.twitterServiceError.value == .AccessDenied {
             return
         }
         self.isSearching.value = true
-        self.twitterService.searchTweets(searchText: text, handler: { (error, tweetResponse) in
+        var params = ""
+        if let response = currentTweetResponse {
+            if isRefreshing {
+                params = response.refreshResultsParamsString!
+            }
+        }
+        self.twitterService.searchTweets(searchText: text, readyQueryParamsString: params, handler: {(error, tweetResponse) in
+        
             DispatchQueue.main.async {
                 self.twitterServiceError.value = error
                 self.isSearching.value = false
@@ -70,12 +85,12 @@ class TweetSearchViewModel {
                 if error == .NoError{
                     self.items.removeAll()
                     if let response = tweetResponse{
+                        self.currentTweetResponse = response
                         self.items.insert(contentsOf: response.tweets, at: 0)
                     }
                 }
                 
             }
-            
         })
     }
 }

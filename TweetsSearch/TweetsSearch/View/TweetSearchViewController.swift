@@ -18,6 +18,7 @@ class TweetSearchViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     
     let viewModel = TweetSearchViewModel()
+    let refreshControl = UIRefreshControl()
     
     var text: String = ""
     
@@ -31,12 +32,19 @@ class TweetSearchViewController: UIViewController {
         self.tweetsTableView.emptyDataSetSource = self
         self.tweetsTableView.emptyDataSetDelegate = self
         self.tweetsTableView.rowHeight = UITableViewAutomaticDimension
-        self.tweetsTableView.estimatedRowHeight = 50
+        self.tweetsTableView.estimatedRowHeight = 80
+        
+        refreshControl.addTarget(self, action: #selector(TweetSearchViewController.didTriggerRefresh(sender:)), for: .valueChanged)
+        self.tweetsTableView.addSubview(refreshControl)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.viewModel.requestAccessToTwitterAccount()
+    }
+    
+    func didTriggerRefresh(sender: AnyObject){
+        self.viewModel.refreshCurrentTweet()
     }
     
     // MARK: - View Model Binding -
@@ -48,6 +56,7 @@ class TweetSearchViewController: UIViewController {
             .map{$0 ? UIColor.black : UIColor.red}
             .bind(to: self.searchTextField.bnd_textColor)
         self.viewModel.isSearching.bind(to: self.activityIndicator.bnd_animating)
+        self.viewModel.isSearching.bind(to: self.refreshControl.bnd_refreshing)
         _ = self.viewModel.twitterServiceError.observeNext { (error) in
             self.tweetsTableView.reloadData()
         }
@@ -59,9 +68,6 @@ class TweetSearchViewController: UIViewController {
 
 // MARK: - UITableViewDataSource -
 extension TweetSearchViewController: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
 }
 
 extension TweetSearchViewController: UITableViewDataSource{

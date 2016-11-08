@@ -24,6 +24,8 @@ class TweetTableViewCell: UITableViewCell {
     
     func bindViewModel(viewModel: TweetCellViewModel){
         
+        self.viewModel = viewModel
+        
         // Binding goes here...
         _ = viewModel.username.observeNext(with: { (realName, screenName) in
             
@@ -36,12 +38,10 @@ class TweetTableViewCell: UITableViewCell {
             self.titleLabel.attributedText = name
         })
         _ = viewModel.tweetText.observeNext { (text) in
-            self.tweetTextView.sizeToFit()
+
             self.styleMentionsAndHashTags()
+            self.tweetTextView.sizeToFit()
         }
-        
-        
-        self.viewModel = viewModel
     }
 
     func styleMentionsAndHashTags(){
@@ -66,11 +66,6 @@ class TweetTableViewCell: UITableViewCell {
         }
         
         
-    }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

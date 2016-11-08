@@ -46,9 +46,9 @@ class TwitterService: NSObject {
         })
     }
     
-    func searchTweets(searchText q: String, handler: @escaping RequestTweetsHandler){
+    func searchTweets(searchText q: String, readyQueryParamsString: String = "", handler: @escaping RequestTweetsHandler){
         if let account = self.accountStore.accounts(with: self.twitterAccountType).first as? ACAccount{
-            let request = self.requestforSearchText(text: q)
+            let request = self.requestforSearchText(text: q, paramsString: readyQueryParamsString)
             request.account = account
             request.perform(handler: { (data, response, error) in
                 if error != nil || response?.statusCode != 200{
@@ -74,13 +74,26 @@ class TwitterService: NSObject {
         }
     }
     
-    private func requestforSearchText(text: String) -> SLRequest {
-        let url = URL(string: Constants.TwitterRESTURLString)
-        let params = [
-            "q" : text,
-            "count": "\(Constants.TweetsPageSize)",
-            "lang": "en"
-        ]
+    private func requestforSearchText(text: String, paramsString: String = "") -> SLRequest {
+        let url = URL(string: Constants.TwitterRESTURLString + paramsString)
+        var params = [AnyHashable: Any]()
+        if paramsString != "" {
+            let parts = paramsString.components(separatedBy: "&")
+            for p in parts{
+                let keyValue = p.components(separatedBy: "=")
+                if keyValue.count == 2 {
+                    params[keyValue[0]] = keyValue[1]
+                }
+            }
+        }
+        else{
+            params = [
+                "q" : text,
+                "count": "\(Constants.TweetsPageSize)",
+                "lang": "en"
+            ]
+        }
+        
         return SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, url: url, parameters: params)
     }
 }
