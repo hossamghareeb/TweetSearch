@@ -8,12 +8,18 @@
 
 import UIKit
 
+
+@objc protocol TweetTableViewCellDelegate{
+    func didClickOnTag(tag: String)
+}
+
 class TweetTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var tweetTextView: UITextView!
     @IBOutlet weak var titleLabel: UILabel!
     private var viewModel: TweetCellViewModel? = nil
+    weak var delegate: TweetTableViewCellDelegate? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,36 +53,33 @@ class TweetTableViewCell: UITableViewCell {
     func styleMentionsAndHashTags(){
         if let viewModel = self.viewModel{
             let attributedText = NSMutableAttributedString(string: viewModel.tweetText.value)
-            print("================")
             for (range, mention) in viewModel.metnionsInTweetText(){
                 attributedText.addAttributes([NSForegroundColorAttributeName: UIColor.blue], range: range)
                 attributedText.addAttributes([NSLinkAttributeName: "mention://\(mention)"], range: range)
-                print(mention)
             }
             
             for (range, hashtag) in viewModel.hashtagsInTweetText(){
                 attributedText.addAttributes([NSForegroundColorAttributeName: UIColor.blue], range: range)
                 attributedText.addAttributes([NSLinkAttributeName: "hashtag://\(hashtag)"], range: range)
-                print(hashtag)
             }
             
-            print("================")
             self.tweetTextView.attributedText = attributedText
             
         }
-        
-        
     }
-
 }
 
 extension TweetTableViewCell: UITextViewDelegate{
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        
-        if URL.scheme == "mention" || URL.scheme == "hashtag" {
+    
+        if URL.scheme == "mention"{
+            //FIXME: We do nothing about mentions right now, We gonna handle it later :)
+            return false
+        }
+        if URL.scheme == "hashtag" {
             
-            /// There urls are ours, we gonna handle them ourselves :)
-            print(URL.host)
+            /// Notify the delegate that a hashtag has been clicked to perform a search with that hashtag.
+            self.delegate?.didClickOnTag(tag: URL.host ?? "")
             return false
         }
         return true // Let the system handles these kinds of urls :)

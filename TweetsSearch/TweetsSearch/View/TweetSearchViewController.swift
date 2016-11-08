@@ -79,6 +79,7 @@ extension TweetSearchViewController: UITableViewDataSource{
         if let vm = self.viewModel.viewModelForTweetAtIndex(index: indexPath.row) {
             cell.bindViewModel(viewModel: vm)
         }
+        cell.delegate = self
         return cell
     }
 }
@@ -132,5 +133,13 @@ extension TweetSearchViewController: DZNEmptyDataSetDelegate{
         if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
             UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
         }
+    }
+}
+
+// MARK: - TweetTableViewCellDelegate -
+
+extension TweetSearchViewController: TweetTableViewCellDelegate{
+    func didClickOnTag(tag: String) {
+        self.viewModel.searchString.value = tag
     }
 }
