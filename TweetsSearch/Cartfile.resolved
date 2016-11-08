@@ -1,6 +1,7 @@
+github "skywinder/ActionSheetPicker-3.0" "2.2.0"
 github "thoughtbot/Curry" "v3.0.0"
 github "dzenbot/DZNEmptyDataSet" "v1.8.1"
 github "ReactiveKit/ReactiveKit" "v3.1.0"
 github "thoughtbot/Runes" "v4.0.1"
 github "thoughtbot/Argo" "v4.1.0"
-github "SwiftBond/Bond" "v5.0.1"
+github "SwiftBond/Bond" "v5.0.2"

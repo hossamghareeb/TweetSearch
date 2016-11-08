@@ -10,6 +10,7 @@ import UIKit
 import Bond
 import ReactiveKit
 import DZNEmptyDataSet
+import CoreActionSheetPicker
 
 class TweetSearchViewController: UIViewController {
 
@@ -41,11 +42,23 @@ class TweetSearchViewController: UIViewController {
         self.tweetsTableView.addSubview(refreshControl)
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.viewModel.requestAccessToTwitterAccount()
     }
     
+    // MARK: - User Actions -
+    
+    @IBAction func didClickOnRefreshButton(_ sender: Any) {
+        
+        ActionSheetStringPicker.show(withTitle: "Auto Refersh", rows: self.viewModel.refreshIntervalStrings, initialSelection: self.viewModel.currentIntervalSelection, doneBlock: { (picker, index, value) in
+                print(index)
+                self.viewModel.currentIntervalSelection = index
+            }, cancel: { (picker) in
+                
+        }, origin: self)
+    }
     func didTriggerRefresh(sender: AnyObject){
         self.viewModel.refreshCurrentTweet()
     }
@@ -71,13 +84,14 @@ class TweetSearchViewController: UIViewController {
             self.tweetsTableView.reloadData()
         }
         _ = self.viewModel.items.observeNext { (e) in
-            self.tweetsTableView.setContentOffset(CGPoint.zero, animated: false)
+//            self.tweetsTableView.setContentOffset(CGPoint.zero, animated: false)
             self.tweetsTableView.reloadData()
         }
     }
 }
 
-// MARK: - UITableViewDataSource -
+// MARK: - UITableViewDelegate -
+
 extension TweetSearchViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -87,6 +101,10 @@ extension TweetSearchViewController: UITableViewDelegate{
         }
     }
 }
+
+
+// MARK: - UITableViewDataSource -
+
 
 extension TweetSearchViewController: UITableViewDataSource{
     

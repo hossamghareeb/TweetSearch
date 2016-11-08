@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061CC92C1DD24A6000A5317D /* CoreActionSheetPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061CC92B1DD24A6000A5317D /* CoreActionSheetPicker.framework */; };
 		062FEBD61DCF6AC500C2B15D /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062FEBD31DCF6AC500C2B15D /* Argo.framework */; };
 		062FEBD71DCF6AC500C2B15D /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062FEBD41DCF6AC500C2B15D /* Curry.framework */; };
 		062FEBD81DCF6AC500C2B15D /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062FEBD51DCF6AC500C2B15D /* Runes.framework */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		061CC92B1DD24A6000A5317D /* CoreActionSheetPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreActionSheetPicker.framework; path = Carthage/Build/iOS/CoreActionSheetPicker.framework; sourceTree = "<group>"; };
 		062FEBD31DCF6AC500C2B15D /* Argo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Argo.framework; path = Carthage/Build/iOS/Argo.framework; sourceTree = "<group>"; };
 		062FEBD41DCF6AC500C2B15D /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Curry.framework; path = Carthage/Build/iOS/Curry.framework; sourceTree = "<group>"; };
 		062FEBD51DCF6AC500C2B15D /* Runes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Runes.framework; path = Carthage/Build/iOS/Runes.framework; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				061CC92C1DD24A6000A5317D /* CoreActionSheetPicker.framework in Frameworks */,
 				06F1D9281DD04A5D000B8FCF /* DZNEmptyDataSet.framework in Frameworks */,
 				062FEBD61DCF6AC500C2B15D /* Argo.framework in Frameworks */,
 				062FEBD71DCF6AC500C2B15D /* Curry.framework in Frameworks */,
@@ -87,6 +90,7 @@
 		0643EEF21DCF005F008997D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				061CC92B1DD24A6000A5317D /* CoreActionSheetPicker.framework */,
 				06F1D9271DD04A5D000B8FCF /* DZNEmptyDataSet.framework */,
 				062FEBD31DCF6AC500C2B15D /* Argo.framework */,
 				062FEBD41DCF6AC500C2B15D /* Curry.framework */,
@@ -297,6 +301,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Curry.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Argo.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/DZNEmptyDataSet.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CoreActionSheetPicker.framework",
 			);
 			outputPaths = (
 			);

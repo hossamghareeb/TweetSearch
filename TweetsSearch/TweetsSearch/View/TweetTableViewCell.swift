@@ -15,6 +15,7 @@ import UIKit
 
 class TweetTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var tweetCountLabel: UILabel!
     @IBOutlet weak var tweetTextView: UITextView!
     @IBOutlet weak var titleLabel: UILabel!
     private var viewModel: TweetCellViewModel? = nil
@@ -41,6 +42,10 @@ class TweetTableViewCell: UITableViewCell {
             let range2 = NSMakeRange(range1.location + range1.length + 1, screenName.characters.count + 1)
             name.addAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 13)], range: range2)
             self.titleLabel.attributedText = name
+        })
+        
+        _ = viewModel.tweetCount.observeNext(with: { (count) in
+            self.tweetCountLabel.text = "\(count)"
         })
         _ = viewModel.tweetText.observeNext { (text) in
 
