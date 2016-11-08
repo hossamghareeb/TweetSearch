@@ -73,6 +73,7 @@ class TweetSearchViewController: UIViewController {
         return indexPaths
     }
     
+    /// Bind the view model with views we have. 
     func bindViewModel(){
         self.viewModel.searchString.bidirectionalBind(to: self.searchTextField.bnd_text)
         self.viewModel.validSearchString
@@ -83,10 +84,9 @@ class TweetSearchViewController: UIViewController {
         _ = self.viewModel.twitterServiceError.observeNext { (error) in
             self.tweetsTableView.reloadData()
         }
-        _ = self.viewModel.items.observeNext { (e) in
-//            self.tweetsTableView.setContentOffset(CGPoint.zero, animated: false)
+        _ = self.viewModel.tweetsHasChanged.observeNext(with: { changed in
             self.tweetsTableView.reloadData()
-        }
+        })
     }
 }
 
